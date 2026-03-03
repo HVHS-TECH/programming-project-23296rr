@@ -8,7 +8,14 @@
 // setup()
 /*******************************************************/
 function setup() {
-	cnv = new Canvas(300, 800)
+	console.log("Working")
+	cnv = new Canvas(400, 700)
+	world.gravity.y = 10;
+
+	console.log("Workingdwadwasdwasdwasd")
+
+	ball_1 = new Sprite(500/2, 500/2, 25, 's')
+	ball_1.color = 'green';
 }
 
 
@@ -16,7 +23,7 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-	
+	background("#808080")
 }
 
 /*******************************************************/
