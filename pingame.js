@@ -28,13 +28,21 @@ function setup() {
 	roof = new Sprite(200, 5, 400, 10, 's')
 	roof.color = 'grey';
 
-	floor_left = new Sprite(87.5, 655, 175, 10, 's')
+	floor_left = new Sprite(25, 625, 175, 10, 's')
 	floor_left.color = 'grey';
 	floor_left.rotation = 25;
 
-	floor_right = new Sprite(322.5, 655, 175, 10, 's')
+	floor_right = new Sprite(375, 625, 175, 10, 's')
 	floor_right.color = 'grey';
 	floor_right.rotation = -25
+
+	flicker_left = new Sprite(125, 665, 75, 10, 's')
+	flicker_left.rotation = 40;
+	flicker_left.color = 'red';
+
+	flicker_right = new Sprite(275, 665, 75, 10, 's')
+	flicker_right.rotation = -40;
+	flicker_right.color = 'red';
  }
 
 
@@ -43,6 +51,22 @@ function setup() {
 /*******************************************************/
 function draw() {
 	background("#808080")
+
+	console.log('controls')
+
+	if (kb.pressing('left')) {
+		flicker_left.rotation = 340;
+	}
+	else if (kb.pressing ('right')) {
+		flicker_right.rotation = -340;
+	}
+	if (kb.released('left')) {
+		flicker_left.rotation = 40;
+	}
+	else if (kb.released('right')) {
+		flicker_right.rotation = -40;
+	}
+
 }
 
 /*******************************************************/
