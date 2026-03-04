@@ -9,26 +9,40 @@
 /*******************************************************/
 function setup() {
 	console.log("Working")
+
 	cnv = new Canvas(400, 700)
 	world.gravity.y = 10;
 
-	console.log("Workingdwadwasdwasdwasd")
+	currentAngleL = 0;
+	targetAngleL = 0;
+	closedAngleL = 40;
+	openAngleL = 340;
 
-	ball_1 = new Sprite(300, 700/2, 25)
+	currentAngleR = 0;
+	targetAngleR = 0;
+	closedAngleR = 320;
+	openAngleR = 20
+	flipSpeed = 0.3;
+
+
+	ball_1 = new Sprite(random(10, 390), 700/2, 25)
 	ball_1.color = 'white';
 	ball_1.friction = 1;
 	ball_1.bounciness = 1;
 
-
-
-	flicker_left = new Sprite(125, 665, 75, 10, 's')
+	flicker_left = new Sprite(140, 675, 75, 10, 's')
 	flicker_left.rotation = 40;
 	flicker_left.color = 'red';
 
-	flicker_right = new Sprite(275, 665, 75, 10, 's')
-	flicker_right.rotation = -40;
+	flicker_right = new Sprite(260, 675, 75, 10, 's')
+	flicker_right.rotation = 320;
 	flicker_right.color = 'red';
+	
+	currentAngleL = closedAngleL;
+	targetAngleL = closedAngleL;
 
+	currentAngleR = closedAngleR;
+	targetAngleR = closedAngleR;
 	basethings()
  }
 
@@ -42,11 +56,11 @@ function basethings() {
 	roof = new Sprite(200, 5, 400, 10, 's')
 	roof.color = 'grey';
 
-	floor_left = new Sprite(25, 625, 175, 10, 's')
+	floor_left = new Sprite(40, 615, 175, 10, 's')
 	floor_left.color = 'grey';
 	floor_left.rotation = 25;
 
-	floor_right = new Sprite(375, 625, 175, 10, 's')
+	floor_right = new Sprite(360, 615, 175, 10, 's')
 	floor_right.color = 'grey';
 	floor_right.rotation = -25
 }
@@ -57,25 +71,35 @@ function basethings() {
 function draw() {
 	background("#808080")
 
-	console.log('controls')
+	if (kb.pressing('left')) {
+		
+	}
 
+
+
+/*
 	if (kb.pressing('left')) {
 		flicker_left.rotation = 340;
 		flicker_left.y = 638;
+		flicker_left.bounciness = 5;
 	}
 	else if (kb.pressing ('right')) {
-		flicker_right.rotation = -340;
+		flicker_right.rotation = 20;
 		flicker_right.y = 638
+		flicker_right.bounciness = 5;
 	}
+	
 	if (kb.released('left')) {
 		flicker_left.rotation = 40;
-		flicker_left.y = 665;
+		flicker_left.y = 675;
+		flicker_left.bounciness = 0;
 	}
 	else if (kb.released('right')) {
-		flicker_right.rotation = -40;
-		flicker_right.y = 665;
+		flicker_right.rotation = 320;
+		flicker_right.y = 675;
+		flicker_right.bounciness = 0;
 	}
-
+*/
 }
 
 /*******************************************************/

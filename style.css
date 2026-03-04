@@ -27,5 +27,6 @@ body {
 
 #restartbutton {
   background-color: aquamarine; 
-  font-family: 'Courier New', Courier, monospace; 
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 0%;
 }
