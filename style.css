@@ -24,3 +24,8 @@ body {
   margin: 0;
   background-color: #f0f0f0;
 }
+
+#restartbutton {
+  background-color: aquamarine; 
+  font-family: 'Courier New', Courier, monospace; 
+}

@@ -19,6 +19,20 @@ function setup() {
 	ball_1.friction = 1;
 	ball_1.bounciness = 1;
 
+
+
+	flicker_left = new Sprite(125, 665, 75, 10, 's')
+	flicker_left.rotation = 40;
+	flicker_left.color = 'red';
+
+	flicker_right = new Sprite(275, 665, 75, 10, 's')
+	flicker_right.rotation = -40;
+	flicker_right.color = 'red';
+
+	basethings()
+ }
+
+function basethings() {
 	wall_left = new Sprite(5, 350, 10, 690, 's')
 	wall_left.color = 'grey';
 
@@ -35,16 +49,7 @@ function setup() {
 	floor_right = new Sprite(375, 625, 175, 10, 's')
 	floor_right.color = 'grey';
 	floor_right.rotation = -25
-
-	flicker_left = new Sprite(125, 665, 75, 10, 's')
-	flicker_left.rotation = 40;
-	flicker_left.color = 'red';
-
-	flicker_right = new Sprite(275, 665, 75, 10, 's')
-	flicker_right.rotation = -40;
-	flicker_right.color = 'red';
- }
-
+}
 
 /*******************************************************/
 // draw()
@@ -56,15 +61,19 @@ function draw() {
 
 	if (kb.pressing('left')) {
 		flicker_left.rotation = 340;
+		flicker_left.y = 638;
 	}
 	else if (kb.pressing ('right')) {
 		flicker_right.rotation = -340;
+		flicker_right.y = 638
 	}
 	if (kb.released('left')) {
 		flicker_left.rotation = 40;
+		flicker_left.y = 665;
 	}
 	else if (kb.released('right')) {
 		flicker_right.rotation = -40;
+		flicker_right.y = 665;
 	}
 
 }
