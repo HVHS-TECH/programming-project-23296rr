@@ -15,27 +15,25 @@ function setup() {
 
 	currentAngleL = 0;
 	targetAngleL = 0;
-	closedAngleL = 40;
-	openAngleL = 340;
+	closedAngleL = 30;
+	openAngleL = -20;
 
 	currentAngleR = 0;
 	targetAngleR = 0;
-	closedAngleR = 320;
+	closedAngleR = -30;
 	openAngleR = 20
-	flipSpeed = 0.3;
+	flipSpeed = 0.5;
 
 
 	ball_1 = new Sprite(random(10, 390), 700/2, 25)
 	ball_1.color = 'white';
 	ball_1.friction = 1;
-	ball_1.bounciness = 1;
+	ball_1.bounciness = 0;
 
-	flicker_left = new Sprite(140, 675, 75, 10, 's')
-	flicker_left.rotation = 40;
+	flicker_left = new Sprite(140, 655, 100, 10, 's')
 	flicker_left.color = 'red';
 
-	flicker_right = new Sprite(260, 675, 75, 10, 's')
-	flicker_right.rotation = 320;
+	flicker_right = new Sprite(260, 655, 100, 10, 's')
 	flicker_right.color = 'red';
 	
 	currentAngleL = closedAngleL;
@@ -56,13 +54,13 @@ function basethings() {
 	roof = new Sprite(200, 5, 400, 10, 's')
 	roof.color = 'grey';
 
-	floor_left = new Sprite(40, 615, 175, 10, 's')
+	floor_left = new Sprite(20, 695, 175, 200, 's')
 	floor_left.color = 'grey';
-	floor_left.rotation = 25;
+	floor_left.rotation = 29;
 
-	floor_right = new Sprite(360, 615, 175, 10, 's')
+	floor_right = new Sprite(380, 695, 175, 200, 's')
 	floor_right.color = 'grey';
-	floor_right.rotation = -25
+	floor_right.rotation = -29
 }
 
 /*******************************************************/
@@ -72,34 +70,28 @@ function draw() {
 	background("#808080")
 
 	if (kb.pressing('left')) {
-		
-	}
-
-
-
-/*
-	if (kb.pressing('left')) {
-		flicker_left.rotation = 340;
-		flicker_left.y = 638;
 		flicker_left.bounciness = 5;
-	}
-	else if (kb.pressing ('right')) {
-		flicker_right.rotation = 20;
-		flicker_right.y = 638
-		flicker_right.bounciness = 5;
-	}
-	
-	if (kb.released('left')) {
-		flicker_left.rotation = 40;
-		flicker_left.y = 675;
+		targetAngleL = openAngleL
+	} else {
 		flicker_left.bounciness = 0;
+		targetAngleL = closedAngleL
 	}
-	else if (kb.released('right')) {
-		flicker_right.rotation = 320;
-		flicker_right.y = 675;
+
+	currentAngleL = lerp(currentAngleL, targetAngleL, flipSpeed);
+	flicker_left.rotation = currentAngleL;
+
+
+	if (kb.pressing('right')) {
+		flicker_right.bounciness = 5;
+		targetAngleR = openAngleR
+	} else {
 		flicker_right.bounciness = 0;
+		targetAngleR = closedAngleR
 	}
-*/
+
+	currentAngleR = lerp(currentAngleR, targetAngleR, flipSpeed);
+	flicker_right.rotation = currentAngleR;
+
 }
 
 /*******************************************************/
