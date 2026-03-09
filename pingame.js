@@ -143,14 +143,14 @@ function draw() {
 	if (ballGroup3.collides(catcher)) {
 		console.log('Game Over')
 	}
-/*
+
 	if (ball_1.collides(flicker_left) && kb.pressing('left')) {
 		ball_1.vel.y = -10
 	}
 	if (ball_1.collides(flicker_right) && kb.pressing('right')) {
 		ball_1.vel.y = -10
 	}
-		*/
+		
 }
 
 /*******************************************************/
