@@ -13,6 +13,8 @@ function setup() {
 	timerL = 60
 	timerR = 60
 
+	ballsSpawned = 1;
+
 	cnv = new Canvas(400, 800)
 	world.gravity.y = 10;
 
@@ -28,15 +30,13 @@ function setup() {
 
 	flipSpeed = 0.5;
 
-	ballGroup1 = new Group();
-	ballGroup2 = new Group();
-	ballGroup3 = new Group();
+	ballGroup = new Group();
 
 	ball_1 = new Sprite(random(10, 390), 700/2, 25)
 	ball_1.color = 'white';
 	ball_1.friction = 1;
 	ball_1.bounciness = 0;
-	ballGroup1.add(ball_1)
+	ballGroup.add(ball_1)
 
 	flicker_left = new Sprite(140, 655, 100, 10, 's')
 	flicker_left.color = 'red';
@@ -74,14 +74,14 @@ function ball2() {
 	ball_2.color = 'white';
 	ball_2.friction = 1;
 	ball_2.bounciness = 0;
-	ballGroup2.add(ball_2)
+	ballGroup.add(ball_2)
 }
 function ball3() {
 	ball_3 = new Sprite(random(10, 390), 700/2, 25)
 	ball_3.color = 'white';
 	ball_3.friction = 1;
 	ball_3.bounciness = 0;
-	ballGroup3.add(ball_3)
+	ballGroup.add(ball_3)
 }
 /*******************************************************/
 // draw()
@@ -134,17 +134,17 @@ function draw() {
 	flicker_right.rotation = currentAngleR;
 
 
-	if (ballGroup1.collides(catcher)) {
+	if (ballGroup.collides(catcher) && ballsSpawned === 1) {
 		ball2()
-	}
-	if (ballGroup2.collides(catcher)) {
+		ballsSpawned = 2;
+	} else if (ballGroup.collides(catcher) && ballsSpawned === 2) {
 		ball3()
-	}
-	if (ballGroup3.collides(catcher)) {
+		ballsSpawned = 3
+	} else if (ballGroup.collides(catcher) && ballsSpawned === 3) {
 		console.log('Game Over')
 	}
 
-	if (ball_1.collides(flicker_left) && kb.pressing('left')) {
+	if (ballGroup.collides(flicker_left) && kb.pressing('left')) {
 		ball_1.vel.y = -10
 	}
 	if (ball_1.collides(flicker_right) && kb.pressing('right')) {
