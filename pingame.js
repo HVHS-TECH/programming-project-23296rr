@@ -133,22 +133,26 @@ function draw() {
 	currentAngleR = lerp(currentAngleR, targetAngleR, flipSpeed);
 	flicker_right.rotation = currentAngleR;
 
-
+	/*spawns new balls when the previous one is caught by the catcher*/
 	if (ballGroup.collides(catcher) && ballsSpawned === 1) {
 		ball2()
 		ballsSpawned = 2;
+		ballGroup.remove(ball_1)
 	} else if (ballGroup.collides(catcher) && ballsSpawned === 2) {
 		ball3()
 		ballsSpawned = 3
+		ballGroup.remove(ball_2)
 	} else if (ballGroup.collides(catcher) && ballsSpawned === 3) {
 		console.log('Game Over')
+		ballGroup.remove(ball_3)
 	}
 
+	/*controls for left flipper hitting the ball*/
 	if (ballGroup.collides(flicker_left) && kb.pressing('left')) {
-		ball_1.vel.y = -10
+		ballGroup.vel.y = -20
 	}
 	if (ball_1.collides(flicker_right) && kb.pressing('right')) {
-		ball_1.vel.y = -10
+		ballGroup.vel.y = -20
 	}
 		
 }
