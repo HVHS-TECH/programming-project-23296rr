@@ -10,8 +10,10 @@
 function setup() {
 	console.log("Working")
 
-	timerL = 60
-	timerR = 60
+	timerL = 15
+	timerR = 15
+
+	score = 0;
 
 	ballsSpawned = 1;
 
@@ -47,6 +49,7 @@ function setup() {
 	catcher = new Sprite(200, 805, 400, 10, 's')
 	catcher.bounciness = -100
 	
+	pointBox = new Sprite(20, 40, 40, 80, 'n')
 	basethings()
  }
 
@@ -97,14 +100,14 @@ function draw() {
 	} else {
 		flicker_left.bounciness = 0;
 		targetAngleL = closedAngleL
-		timerL = 60
+		timerL = 15
 	}
 
 	/*stops player from holding flipper up forever*/
 	if (timerL <= 0) {
 		flicker_left.bounciness = 0;
 		targetAngleL = closedAngleL
-		timerL = -60
+		timerL = -15
 	}
 
 	/*smoothness of left flipper*/
@@ -119,14 +122,14 @@ function draw() {
 	} else {
 		flicker_right.bounciness = 0;
 		targetAngleR = closedAngleR
-		timerR = 60
+		timerR = 15
 	}
 
 	/*stops player from holding flipper up forever*/
 	if (timerR <= 0) {
 		flicker_right.bounciness = 0;
 		targetAngleR = closedAngleR
-		timerR = -60
+		timerR = -15
 	}
 
 	/*smoothness of right flipper*/
