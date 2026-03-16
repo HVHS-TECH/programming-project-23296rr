@@ -46,13 +46,18 @@ function setup() {
 	flicker_right = new Sprite(260, 655, 100, 10, 's')
 	flicker_right.color = 'red';
 	
-	catcher = new Sprite(200, 805, 400, 10, 's')
+	catcher = new Sprite(200, 805, 400, 10, 'n')
 	catcher.bounciness = -100
 	
-	pointBox = new Sprite(20, 40, 40, 80, 'n')
+	pointBoxL = new Sprite(20, 40, 40, 80, 'n')
+	
+	pointBoxR = new Sprite(380, 40, 40, 80, 'n')
+
+
+
 	basethings()
  }
-
+/* creates the walls, roof, floor and obastacles of the pinball machine */
 function basethings() {
 	wall_left = new Sprite(5, 350, 10, 690, 's')
 	wall_left.color = 'grey';
@@ -70,6 +75,15 @@ function basethings() {
 	floor_right = new Sprite(380, 695, 175, 200, 's')
 	floor_right.color = 'grey';
 	floor_right.rotation = -29
+
+	obstacle1 = new Sprite(200, 200, 50, 's')
+	obstacle1.color = 'grey';
+
+	obstacle2 = new Sprite(100, 300, 50, 's')
+	obstacle2.color = 'grey';
+
+	obastacle3 = new Sprite(300, 300, 50, 's')
+	obastacle3.color = 'grey';
 }
 
 function ball2() {
@@ -137,15 +151,15 @@ function draw() {
 	flicker_right.rotation = currentAngleR;
 
 	/*spawns new balls when the previous one is caught by the catcher*/
-	if (ballGroup.collides(catcher) && ballsSpawned === 1) {
+	if (ballGroup.overlaps(catcher) && ballsSpawned === 1) {
 		ball2()
 		ballsSpawned = 2;
 		ballGroup.remove(ball_1)
-	} else if (ballGroup.collides(catcher) && ballsSpawned === 2) {
+	} else if (ballGroup.overlaps(catcher) && ballsSpawned === 2) {
 		ball3()
 		ballsSpawned = 3
 		ballGroup.remove(ball_2)
-	} else if (ballGroup.collides(catcher) && ballsSpawned === 3) {
+	} else if (ballGroup.overlaps(catcher) && ballsSpawned === 3) {
 		console.log('Game Over')
 		ballGroup.remove(ball_3)
 	}
@@ -154,10 +168,20 @@ function draw() {
 	if (ballGroup.collides(flicker_left) && kb.pressing('left')) {
 		ballGroup.vel.y = -20
 	}
-	if (ball_1.collides(flicker_right) && kb.pressing('right')) {
+	if (ballGroup.collides(flicker_right) && kb.pressing('right')) {
 		ballGroup.vel.y = -20
 	}
 		
+
+	/*adding to score when the ball hits the point box*/
+	if (ballGroup.overlaps(pointBoxL)) {
+		score = score + 1;
+		console.log(score)
+	}
+	if (ballGroup.overlaps(pointBoxR)) {
+		score = score + 1;
+		console.log(score)
+	}
 }
 
 /*******************************************************/
