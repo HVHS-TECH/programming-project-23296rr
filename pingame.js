@@ -18,7 +18,8 @@ function setup() {
 	ballsSpawned = 1;
 
 	cnv = new Canvas(400, 800)
-	world.gravity.y = 10;
+	world.gravity.y = 15;
+	// difficulty = 10;
 
 	currentAngleL = 0;
 	targetAngleL = 0;
@@ -37,6 +38,7 @@ function setup() {
 	ball_1 = new Sprite(random(10, 390), 700/2, 25)
 	ball_1.color = 'white';
 	ball_1.friction = 1;
+	ball_1.drag = 0;
 	ball_1.bounciness = 0;
 	ballGroup.add(ball_1)
 
@@ -52,6 +54,10 @@ function setup() {
 	pointBoxL = new Sprite(20, 40, 40, 80, 'n')
 	
 	pointBoxR = new Sprite(380, 40, 40, 80, 'n')
+
+	text = new Sprite(200, 40, 0, 0, 'n')
+	text.color = 'white';
+	text.textSize = 32;
 
 
 
@@ -78,12 +84,15 @@ function basethings() {
 
 	obstacle1 = new Sprite(200, 200, 50, 's')
 	obstacle1.color = 'grey';
+	obstacle1.bounciness = 1;
 
 	obstacle2 = new Sprite(100, 300, 50, 's')
 	obstacle2.color = 'grey';
+	obstacle2.bounciness = 1;
 
-	obastacle3 = new Sprite(300, 300, 50, 's')
-	obastacle3.color = 'grey';
+	obstacle3 = new Sprite(300, 300, 50, 's')
+	obstacle3.color = 'grey';
+	obstacle3.bounciness = 1;
 }
 
 function ball2() {
@@ -105,7 +114,8 @@ function ball3() {
 /*******************************************************/
 function draw() {
 	background("#808080")
-
+	// displays the score on the screen
+	text.text = "Score: " + score;
 	/*controls for left flipper*/
 	if (kb.pressing('left')) {
 		flicker_left.bounciness = 5;
@@ -183,7 +193,25 @@ function draw() {
 		console.log(score)
 	}
 }
-
+/*
+function gameEasy() {
+	localStorage.setItem('difficulty', '5')
+	difficulty = 5;
+	window.location.href = 'pingame.html';
+	console.log(difficulty);
+}
+function gameMedium() {
+	localStorage.setItem('difficulty', '10')
+	difficulty = 10;
+	window.location.href = 'pingame.html';
+	console.log(difficulty);
+}
+function gameHard() {
+	localStorage.setItem('difficulty', '15')
+	difficulty = 15;
+	window.location.href = 'pingame.html';
+	console.log(difficulty);
+}
 /*******************************************************/
 //  END OF PROGRAM
 /*******************************************************/
