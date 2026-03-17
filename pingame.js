@@ -84,15 +84,15 @@ function basethings() {
 
 	obstacle1 = new Sprite(200, 200, 50, 's')
 	obstacle1.color = 'grey';
-	obstacle1.bounciness = 1;
+	obstacle1.bounciness = 2;
 
 	obstacle2 = new Sprite(100, 300, 50, 's')
 	obstacle2.color = 'grey';
-	obstacle2.bounciness = 1;
+	obstacle2.bounciness = 2;
 
 	obstacle3 = new Sprite(300, 300, 50, 's')
 	obstacle3.color = 'grey';
-	obstacle3.bounciness = 1;
+	obstacle3.bounciness = 2;
 }
 
 function ball2() {
