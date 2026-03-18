@@ -3,35 +3,33 @@
 // Creates Pinball Game
 /// Written by Remy Robert
 /*******************************************************/
-	
+	let timerL = 15
+	let timerR = 15
+
+	let score = 0;
+
+	let ballsSpawned = 1;
+
+	let currentAngleL = 0;
+	let targetAngleL = 0;
+	const closedAngleL = 30;
+	const openAngleL = -20;
+
+	let currentAngleR = 0;
+	let targetAngleR = 0;
+	const closedAngleR = -30;
+	const openAngleR = 20;
+
+	const flipSpeed = 0.5;
 /*******************************************************/
 // setup()
 /*******************************************************/
 function setup() {
 	console.log("Working")
 
-	timerL = 15
-	timerR = 15
-
-	score = 0;
-
-	ballsSpawned = 1;
-
 	cnv = new Canvas(400, 800)
 	world.gravity.y = 15;
 	// difficulty = 10;
-
-	currentAngleL = 0;
-	targetAngleL = 0;
-	closedAngleL = 30;
-	openAngleL = -20;
-
-	currentAngleR = 0;
-	targetAngleR = 0;
-	closedAngleR = -30;
-	openAngleR = 20
-
-	flipSpeed = 0.5;
 
 	ballGroup = new Group();
 	obstacleGroup = new Group();
