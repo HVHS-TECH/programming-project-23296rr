@@ -34,6 +34,7 @@ function setup() {
 	flipSpeed = 0.5;
 
 	ballGroup = new Group();
+	obstacleGroup = new Group();
 
 	ball_1 = new Sprite(random(10, 390), 700/2, 25)
 	ball_1.color = 'white';
@@ -85,14 +86,17 @@ function basethings() {
 	obstacle1 = new Sprite(200, 200, 50, 's')
 	obstacle1.color = 'grey';
 	obstacle1.bounciness = 2;
+	obstacleGroup.add(obstacle1)
 
 	obstacle2 = new Sprite(100, 300, 50, 's')
 	obstacle2.color = 'grey';
 	obstacle2.bounciness = 2;
+	obstacleGroup.add(obstacle2)
 
 	obstacle3 = new Sprite(300, 300, 50, 's')
 	obstacle3.color = 'grey';
 	obstacle3.bounciness = 2;
+	obstacleGroup.add(obstacle3)
 }
 
 function ball2() {
@@ -185,14 +189,19 @@ function draw() {
 
 	/*adding to score when the ball hits the point box*/
 	if (ballGroup.overlaps(pointBoxL)) {
-		score = score + 1;
+		score = score + 100000;
 		console.log(score)
 	}
 	if (ballGroup.overlaps(pointBoxR)) {
-		score = score + 1;
+		score = score + 100000;
 		console.log(score)
 	}
-}
+	// if ball hits obstacle add points
+	if (ballGroup.collides(obstacleGroup)) {
+		score = score + 10000
+	}
+		
+}	
 /*
 function gameEasy() {
 	localStorage.setItem('difficulty', '5')
