@@ -10,6 +10,8 @@
 
 	let ballsSpawned = 1;
 
+	let gameDifficulty = 5;
+
 	let currentAngleL = 0;
 	let targetAngleL = 0;
 	const closedAngleL = 30;
@@ -28,8 +30,15 @@ function setup() {
 	console.log("Working")
 
 	cnv = new Canvas(400, 800)
-	world.gravity.y = 15;
-	// difficulty = 10;
+	world.gravity.y = gameDifficulty;
+	savedDifficulty = localStorage.getItem('difficulty');
+	
+	if (savedDifficulty === 'null') {
+		gameDifficulty = 5;
+	} else {
+		gameDifficulty = Number(savedDifficulty)
+		console.log("Loaded game dificulty")
+	}
 
 	ballGroup = new Group();
 	obstacleGroup = new Group();
