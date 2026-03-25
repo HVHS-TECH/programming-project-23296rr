@@ -23,22 +23,29 @@
 	const openAngleR = 20;
 
 	const flipSpeed = 0.5;
+
+	let obstacleBounciness = 1;
+
+	let lives = 3;
 /*******************************************************/
 // setup()
 /*******************************************************/
 function setup() {
 	console.log("Working")
 
+	savedDifficulty = localStorage.getItem('difficulty');
+	if (savedDifficulty === 'null') {
+			gameDifficulty = 0;
+		} else {
+			gameDifficulty = Number(savedDifficulty)
+			console.log("Loaded game difficulty '" + gameDifficulty + "' from local storage")
+		}
+
 	cnv = new Canvas(400, 800)
 	world.gravity.y = gameDifficulty;
-	savedDifficulty = localStorage.getItem('difficulty');
 	
-	if (savedDifficulty === 'null') {
-		gameDifficulty = 5;
-	} else {
-		gameDifficulty = Number(savedDifficulty)
-		console.log("Loaded game dificulty")
-	}
+	
+	
 
 	ballGroup = new Group();
 	obstacleGroup = new Group();
@@ -63,11 +70,33 @@ function setup() {
 	
 	pointBoxR = new Sprite(380, 40, 40, 80, 'n')
 
-	text = new Sprite(200, 40, 0, 0, 'n')
-	text.color = 'white';
-	text.textSize = 32;
+	scoreDisplay = new Sprite(200, 40, 0, 0, 'n')
+	scoreDisplay.color = 'white';
+	scoreDisplay.textSize = 32;
+	
+	difficultyDisplay = new Sprite(200, 80, 0, 0, 'n')
+	difficultyDisplay.color = 'white';
+	difficultyDisplay.textSize = 24;
 
+	livesDisplay = new Sprite(200, 120, 0, 0, 'n')
+	livesDisplay.color = 'white';
+	livesDisplay.textSize = 24;
 
+	if (gameDifficulty === 5) {
+		difficultyDisplay.text = "Difficulty: Easy";
+	} else if (gameDifficulty === 10) {
+		difficultyDisplay.text = "Difficulty: Medium";
+	} else if (gameDifficulty === 15) {
+		difficultyDisplay.text = "Difficulty: Hard";
+	}
+
+	if (gameDifficulty === 5) {
+		obstacleBounciness = 0.5;
+	} else if (gameDifficulty === 10) {
+		obstacleBounciness = 1;
+	} else if (gameDifficulty === 15) {
+		obstacleBounciness = 2;
+	}
 
 	basethings()
  }
@@ -91,18 +120,18 @@ function basethings() {
 	floor_right.rotation = -29
 
 	obstacle1 = new Sprite(200, 200, 50, 's')
-	obstacle1.color = 'grey';
-	obstacle1.bounciness = 2;
+	// obstacle1.color = 'grey';
+	obstacle1.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle1)
 
 	obstacle2 = new Sprite(100, 300, 50, 's')
-	obstacle2.color = 'grey';
-	obstacle2.bounciness = 2;
+	// obstacle2.color = 'grey';
+	obstacle2.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle2)
 
 	obstacle3 = new Sprite(300, 300, 50, 's')
-	obstacle3.color = 'grey';
-	obstacle3.bounciness = 2;
+	// obstacle3.color = 'grey';
+	obstacle3.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle3)
 }
 
@@ -111,6 +140,7 @@ function ball2() {
 	ball_2.color = 'white';
 	ball_2.friction = 1;
 	ball_2.bounciness = 0;
+	lives = lives - 1;
 	ballGroup.add(ball_2)
 }
 function ball3() {
@@ -118,15 +148,22 @@ function ball3() {
 	ball_3.color = 'white';
 	ball_3.friction = 1;
 	ball_3.bounciness = 0;
+	lives = lives - 1;
 	ballGroup.add(ball_3)
 }
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
-	background("#808080")
+	background("grey")
 	// displays the score on the screen
-	text.text = "Score: " + score;
+	scoreDisplay.text = "Score: " + score;
+
+	obstacleGroup.color = random(['red', 'yellow', 'orange']);
+	pointBoxL.color = random(['blue', 'cyan', 'magenta']);
+	pointBoxR.color = random(['blue', 'cyan', 'magenta']);
+
+	console.log(obstacleBounciness)
 	/*controls for left flipper*/
 	if (kb.pressing('left')) {
 		flicker_left.bounciness = 5;
@@ -183,6 +220,7 @@ function draw() {
 	} else if (ballGroup.overlaps(catcher) && ballsSpawned === 3) {
 		console.log('Game Over')
 		ballGroup.remove(ball_3)
+		window.location.href = "end.html"
 	}
 
 	/*controls for left flipper hitting the ball*/
@@ -193,7 +231,6 @@ function draw() {
 		ballGroup.vel.y = -20
 	}
 		
-
 	/*adding to score when the ball hits the point box*/
 	if (ballGroup.overlaps(pointBoxL)) {
 		score = score + 100000;
@@ -208,26 +245,11 @@ function draw() {
 		score = score + 10000
 	}
 		
+	for (i = 3; i < 4; i++){
+    	livesDisplay.text = "Lives: " + lives;
+    }
 }	
-/*
-function gameEasy() {
-	localStorage.setItem('difficulty', '5')
-	difficulty = 5;
-	window.location.href = 'pingame.html';
-	console.log(difficulty);
-}
-function gameMedium() {
-	localStorage.setItem('difficulty', '10')
-	difficulty = 10;
-	window.location.href = 'pingame.html';
-	console.log(difficulty);
-}
-function gameHard() {
-	localStorage.setItem('difficulty', '15')
-	difficulty = 15;
-	window.location.href = 'pingame.html';
-	console.log(difficulty);
-}
+
 /*******************************************************/
 //  END OF PROGRAM
 /*******************************************************/
