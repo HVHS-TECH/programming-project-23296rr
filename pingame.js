@@ -7,6 +7,7 @@
 	let timerR = 15
 
 	let score = 0;
+	let outputScore;
 
 	let ballsSpawned = 1;
 
@@ -27,11 +28,28 @@
 	let obstacleBounciness = 1;
 
 	let lives = 3;
+
+	const flashDurationO1 = 30;
+	let flashTimerO1 = 0;
+
+	const flashDurationO2 = 30;
+	let flashTimerO2 = 0;
+
+	const flashDurationO3 = 30;
+	let flashTimerO3 = 0;
+	
+	const flashDurationB1 = 30;
+	let flashTimerB1 = 0;
+	
+	const flashDurationB2 = 30;
+	let flashTimerB2 = 0;
 /*******************************************************/
 // setup()
 /*******************************************************/
 function setup() {
 	console.log("Working")
+
+	outputScore = select('#score-output');
 
 	savedDifficulty = localStorage.getItem('difficulty');
 	if (savedDifficulty === 'null') {
@@ -43,8 +61,6 @@ function setup() {
 
 	cnv = new Canvas(400, 800)
 	world.gravity.y = gameDifficulty;
-	
-	
 	
 
 	ballGroup = new Group();
@@ -158,10 +174,7 @@ function draw() {
 	background("grey")
 	// displays the score on the screen
 	scoreDisplay.text = "Score: " + score;
-
-	obstacleGroup.color = random(['red', 'yellow', 'orange']);
-	pointBoxL.color = random(['blue', 'cyan', 'magenta']);
-	pointBoxR.color = random(['blue', 'cyan', 'magenta']);
+	outputScore.html(nf(score, 1, 2));
 
 	console.log(obstacleBounciness)
 	/*controls for left flipper*/
@@ -244,7 +257,80 @@ function draw() {
 	if (ballGroup.collides(obstacleGroup)) {
 		score = score + 10000
 	}
-		
+	// makes the obstacles and point boxes change color when hit
+	if (ballGroup.collides(obstacle1)) {
+		flashTimerO1 = flashDurationO1;
+	}
+	if (ballGroup.collides(obstacle2)) {
+		flashTimerO2 = flashDurationO2;
+	}
+	if (ballGroup.collides(obstacle3)) {
+		flashTimerO3 = flashDurationO3;
+	} 
+
+	if (ballGroup.overlaps(pointBoxL)) {
+		flashTimerB1 = flashDurationB1;
+	}
+	if (ballGroup.overlaps(pointBoxR)) {
+		flashTimerB2 = flashDurationB2;
+	}
+
+	if (flashTimerO1 > 0) {
+		if  (frameCount % 2 === 0) {
+			obstacle1.color = 'yellow';
+		} else {
+			obstacle1.color = 'orange';
+		}
+		flashTimerO1 = flashTimerO1 - 1; 
+	} else {
+			obstacle1.color = 'grey';
+	}
+
+
+	if (flashTimerO2 > 0) {
+		if  (frameCount % 2 === 0) {
+			obstacle2.color = 'yellow';
+		} else {
+			obstacle2.color = 'orange';
+		}
+		flashTimerO2 = flashTimerO2 - 1; 
+	} else {
+		obstacle2.color = 'grey';
+	}
+
+	if (flashTimerO3 > 0) {
+		if  (frameCount % 2 === 0) {
+			obstacle3.color = 'yellow';
+		} else {
+			obstacle3.color = 'orange';
+		} 
+		flashTimerO3 = flashTimerO3 - 1;
+	} else {
+		obstacle3.color = 'grey';
+	}
+
+	if (flashTimerB1 > 0) {
+		if  (frameCount % 2 === 0) {
+			pointBoxL.color = 'yellow';
+		} else {
+			pointBoxL.color = 'orange';
+		} 
+		flashTimerB1 = flashTimerB1 - 1;
+	} else {
+		pointBoxL.color = 'white';
+	}
+
+	if (flashTimerB2 > 0) {
+		if  (frameCount % 2 === 0) {
+			pointBoxR.color = 'yellow';
+		} else {
+			pointBoxR.color = 'orange';
+		}	
+		flashTimerB2 = flashTimerB2 - 1;
+	} else {
+		pointBoxR.color = 'white';
+	}
+
 	for (i = 3; i < 4; i++){
     	livesDisplay.text = "Lives: " + lives;
     }
