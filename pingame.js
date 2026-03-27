@@ -7,7 +7,7 @@
 	let timerR = 15
 
 	let score = 0;
-	let outputScore;
+	// let outputScore;
 
 	let ballsSpawned = 1;
 
@@ -49,7 +49,7 @@
 function setup() {
 	console.log("Working")
 
-	outputScore = select('#score-output');
+	// outputScore = select('#score-output');
 
 	savedDifficulty = localStorage.getItem('difficulty');
 	if (savedDifficulty === 'null') {
@@ -174,7 +174,7 @@ function draw() {
 	background("grey")
 	// displays the score on the screen
 	scoreDisplay.text = "Score: " + score;
-	outputScore.html(nf(score, 1, 2));
+	// outputScore.html(nf(score, 1, 2));
 
 	console.log(obstacleBounciness)
 	/*controls for left flipper*/
