@@ -49,8 +49,6 @@
 function setup() {
 	console.log("Working")
 
-	// outputScore = select('#score-output');
-
 	savedDifficulty = localStorage.getItem('difficulty');
 	if (savedDifficulty === 'null') {
 			gameDifficulty = 0;
@@ -174,7 +172,7 @@ function draw() {
 	background("grey")
 	// displays the score on the screen
 	scoreDisplay.text = "Score: " + score;
-	// outputScore.html(nf(score, 1, 2));
+	localStorage.setItem('score', score);
 
 	console.log(obstacleBounciness)
 	/*controls for left flipper*/
@@ -285,7 +283,6 @@ function draw() {
 	} else {
 			obstacle1.color = 'grey';
 	}
-
 
 	if (flashTimerO2 > 0) {
 		if  (frameCount % 2 === 0) {
