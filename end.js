@@ -6,11 +6,11 @@ function setup() {
     
     canvas = new Canvas(500, 50);
 
-    scoreDisplay = new Sprite(50, 25, 0, 0);
+    scoreDisplay = new Sprite(100, 25, 0, 0);
     scoreDisplay.textSize = 24;
     scoreDisplay.text = "Final Score: " + score + '!';
 }
 
 function draw() {   
- background("#f0f0f0")
+    background("#f0f0f0")
 }
