@@ -96,6 +96,7 @@ function setup() {
 	livesDisplay.color = 'white';
 	livesDisplay.textSize = 24;
 
+	// displays game difficulty
 	if (gameDifficulty === 5) {
 		difficultyDisplay.text = "Difficulty: Easy";
 	} else if (gameDifficulty === 10) {
@@ -104,6 +105,7 @@ function setup() {
 		difficultyDisplay.text = "Difficulty: Hard";
 	}
 
+	// sets obstacle bounciness based on difficulty chosen
 	if (gameDifficulty === 5) {
 		obstacleBounciness = 0.5;
 	} else if (gameDifficulty === 10) {
@@ -134,17 +136,14 @@ function basethings() {
 	floor_right.rotation = -29
 
 	obstacle1 = new Sprite(200, 200, 50, 's')
-	// obstacle1.color = 'grey';
 	obstacle1.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle1)
 
 	obstacle2 = new Sprite(100, 300, 50, 's')
-	// obstacle2.color = 'grey';
 	obstacle2.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle2)
 
 	obstacle3 = new Sprite(300, 300, 50, 's')
-	// obstacle3.color = 'grey';
 	obstacle3.bounciness = obstacleBounciness;
 	obstacleGroup.add(obstacle3)
 }
@@ -172,9 +171,7 @@ function draw() {
 	background("grey")
 	// displays the score on the screen
 	scoreDisplay.text = "Score: " + score;
-	localStorage.setItem('score', score);
 
-	console.log(obstacleBounciness)
 	/*controls for left flipper*/
 	if (kb.pressing('left')) {
 		flicker_left.bounciness = 5;
@@ -215,6 +212,14 @@ function draw() {
 		timerR = -15
 	}
 
+	/*bouncess the ball when hitting flippers*/
+	if (ballGroup.collides(flicker_left) && kb.pressing('left') && timerL >= 1 && timerR >= 1) {
+		ballGroup.vel.y = -20
+	}
+	if (ballGroup.collides(flicker_right) && kb.pressing('right') && timerL >= 1 && timerR >= 1) {
+		ballGroup.vel.y = -20
+	}
+
 	/*smoothness of right flipper*/
 	currentAngleR = lerp(currentAngleR, targetAngleR, flipSpeed);
 	flicker_right.rotation = currentAngleR;
@@ -232,14 +237,6 @@ function draw() {
 		console.log('Game Over')
 		ballGroup.remove(ball_3)
 		window.location.href = "end.html"
-	}
-
-	/*controls for left flipper hitting the ball*/
-	if (ballGroup.collides(flicker_left) && kb.pressing('left')) {
-		ballGroup.vel.y = -20
-	}
-	if (ballGroup.collides(flicker_right) && kb.pressing('right')) {
-		ballGroup.vel.y = -20
 	}
 		
 	/*adding to score when the ball hits the point box*/
@@ -273,6 +270,7 @@ function draw() {
 		flashTimerB2 = flashDurationB2;
 	}
 
+	// add flashing colors when gainging points onto the obstacle and point boxes
 	if (flashTimerO1 > 0) {
 		if  (frameCount % 2 === 0) {
 			obstacle1.color = 'yellow';
@@ -283,6 +281,7 @@ function draw() {
 	} else {
 			obstacle1.color = 'grey';
 	}
+
 
 	if (flashTimerO2 > 0) {
 		if  (frameCount % 2 === 0) {
@@ -327,7 +326,7 @@ function draw() {
 	} else {
 		pointBoxR.color = 'white';
 	}
-
+// displays lives
 	for (i = 3; i < 4; i++){
     	livesDisplay.text = "Lives: " + lives;
     }
