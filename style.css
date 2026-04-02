@@ -25,11 +25,6 @@ body {
   background-color: #f0f0f0;
 }
 
-#restartbutton {
-  background-color: aquamarine; 
-  font-family: 'Courier New', Courier, monospace;
-  margin-left: 0%;
-}
 
 #instructions {
   font-family: 'Courier New', Courier, monospace;
@@ -51,4 +46,31 @@ body {
   padding-left: 30%;
   padding-right: 30%;
   text-align: center;
+}
+
+#titleend {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  -webkit-text-stroke: 2px black;
+  color:aliceblue;
+  display: flex;
+  justify-content: center;
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 150px;
+}
+
+#restartbutton {
+  background-color: aquamarine; 
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 47%;
+  position: fixed;
+  top: 375px;
+  left: 0;
+  z-index: 1000;
+  justify-content: center;
 }

@@ -171,6 +171,7 @@ function draw() {
 	background("grey")
 	// displays the score on the screen
 	scoreDisplay.text = "Score: " + score;
+	localStorage.setItem('score', score);
 
 	/*controls for left flipper*/
 	if (kb.pressing('left')) {
