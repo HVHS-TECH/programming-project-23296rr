@@ -3,6 +3,18 @@
 // Creates Pinball Game
 /// Written by Remy Robert
 /*******************************************************/
+	
+const firebaseConfig = {
+    apiKey: "AIzaSyCB9Br_Jb9KqYC5mCiV88_Y--I677PEGtc",
+    authDomain: "pin-that-ball-3fc56.firebaseapp.com",
+    databaseURL: "https://pin-that-ball-3fc56-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "pin-that-ball-3fc56",
+    storageBucket: "pin-that-ball-3fc56.firebasestorage.app",
+    messagingSenderId: "829901276897",
+    appId: "1:829901276897:web:9cd58edd48463c763259a0",
+    measurementId: "G-Z51N0FS158"
+  };
+
 	let timerL = 15
 	let timerR = 15
 
@@ -60,7 +72,6 @@ function setup() {
 	cnv = new Canvas(400, 800)
 	world.gravity.y = gameDifficulty;
 	
-
 	ballGroup = new Group();
 	obstacleGroup = new Group();
 
@@ -149,6 +160,7 @@ function basethings() {
 	obstacleGroup.add(obstacle3)
 }
 
+// creates second ball when first one dies
 function ball2() {
 	ball_2 = new Sprite(random(10, 390), 700/2, 25)
 	ball_2.color = 'white';
@@ -156,7 +168,17 @@ function ball2() {
 	ball_2.bounciness = 0;
 	lives = lives - 1;
 	ballGroup.add(ball_2)
+	// creats lots of blocks when ball dies
+	for (i = 0; i < 100; i++) {
+		console.log('alienss')
+		alien = new Sprite(200, 720, 10, 10);
+		alien.bounciness = 0;
+		alien.friction = 0;
+		alien.drag = 0;
+	}
 }
+
+// creates third ball when second one diest
 function ball3() {
 	ball_3 = new Sprite(random(10, 390), 700/2, 25)
 	ball_3.color = 'white';
@@ -164,6 +186,14 @@ function ball3() {
 	ball_3.bounciness = 0;
 	lives = lives - 1;
 	ballGroup.add(ball_3)
+	// creates lots of blocks when ball dies
+	for (i = 0; i < 100; i++) {
+		console.log('alienss')
+		alien = new Sprite(200, 720, 10, 10);
+		alien.bounciness = 0;
+		alien.friction = 0;
+		alien.drag = 0;
+	}
 }
 /*******************************************************/
 // draw()
@@ -231,6 +261,13 @@ function draw() {
 	} else if (ballGroup.overlaps(catcher) && ballsSpawned === 3) {
 		console.log('Game Over')
 		ballGroup.remove(ball_3)
+		for (i = 0; i < 100; i++) {
+		console.log('alienss')
+		alien = new Sprite(200, 720, 10, 10);
+		alien.bounciness = 0;
+		alien.friction = 0;
+		alien.drag = 0;
+	}
 		window.location.href = "end.html"
 	}
 
