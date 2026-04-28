@@ -1,12 +1,12 @@
 function setup() {
-    console.log("Working", "Score: " + localStorage.getItem('score'))
+    console.log("Working", "Score: " + localStorage.getItem('score')) //checks if the score has correctly been pulled from storage
 
-    let score = localStorage.getItem('score');
+    let score = localStorage.getItem('score'); //sets the score variable as the score from storage
     console.log("Score: " + score);
     
     canvas = new Canvas(500, 50);
 
-    scoreDisplay = new Sprite(100, 25, 0, 0);
+    scoreDisplay = new Sprite(225, 25, 0, 0);
     scoreDisplay.textSize = 24;
     scoreDisplay.text = "Final Score: " + score + '!';
 }
